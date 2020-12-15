@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{36ac10b4-8258-4988-854b-d2e34432b792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="User Interface">
+      <UniqueIdentifier>{4d35ca61-f0ed-4aa6-b863-e41f4e9be352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{c5c04f99-142f-4d4a-9d0e-4bdc5568d339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Networks">
+      <UniqueIdentifier>{1d1abd6c-ce7b-4519-b1d7-54f52292a802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{ef98f4d1-122a-47f4-b64e-01acba33e40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Tools\imgui">
+      <UniqueIdentifier>{d149884b-5c28-4ec5-a3b8-2fd7c6fc1c9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\stb">
+      <UniqueIdentifier>{68164975-0231-4bd9-bedb-eea974904fc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Gameplay">
+      <UniqueIdentifier>{dfce9a2e-649f-4246-bf2e-24eba6ff018a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>Tools\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="stb\stb_image.cpp">
+      <Filter>Tools\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlatform.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleResources.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScreen.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSound.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTaskManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleUI.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenOverlay.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenBackground.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenGame.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenLoading.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenMainMenu.cpp">
+      <Filter>User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Networks.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLinkingContext.cpp">
+      <Filter>Modules\Networks</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleNetworking.cpp">
+      <Filter>Modules\Networks</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleNetworkingClient.cpp">
+      <Filter>Modules\Networks</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleNetworkingCommons.cpp">
+      <Filter>Modules\Networks</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleNetworkingServer.cpp">
+      <Filter>Modules\Networks</Filter>
+    </ClCompile>
+    <ClCompile Include="UnityBuild.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationManagerServer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="DeliveryManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryStream.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationManagerClient.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleBehaviour.cpp">
+      <Filter>Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollision.cpp">
+      <Filter>Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameObject.cpp">
+      <Filter>Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviours.cpp">
+      <Filter>Modules\Gameplay</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlatform.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleResources.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScreen.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSound.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTaskManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleUI.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenOverlay.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenBackground.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenGame.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenLoading.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenMainMenu.h">
+      <Filter>User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Networks.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="stb\stb_image.h">
+      <Filter>Tools\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx11.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Tools\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteSwap.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLinkingContext.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleNetworking.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleNetworkingClient.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleNetworkingCommons.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleNetworkingServer.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="Maths.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DeliveryManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryStream.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplicationManagerClient.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplicationManagerServer.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>Modules\Networks</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleGameObject.h">
+      <Filter>Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleBehaviour.h">
+      <Filter>Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCollision.h">
+      <Filter>Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviours.h">
+      <Filter>Modules\Gameplay</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Game\vertex_shader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
+    <FxCompile Include="Game\pixel_shader.hlsl">
+      <Filter>Resource Files</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
