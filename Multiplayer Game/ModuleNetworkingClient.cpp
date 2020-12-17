@@ -132,21 +132,18 @@ void ModuleNetworkingClient::onPacketReceived(const InputMemoryStream &packet, c
 		// Handle replication packages
 		if (message == ServerMessage::Replication)
 		{
-			if (deliveryManager.processSequenceNumber(packet))
-				replicationManager.read(packet);
-		}
-		// Handle inputs
-		else if (message == ServerMessage::Input)
-		{
-			// Server reconciliation
 			uint32 currentSequenceNumber = 0;
 			packet >> currentSequenceNumber;
 
+			if (deliveryManager.processSequenceNumber(packet))
+				replicationManager.read(packet);
+
+			// Server reconciliation
 			GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
-			if (myGameObject && currentSequenceNumber > lastInputSequenceNumber)
+			if (myGameObject && currentSequenceNumber > inputDataFront)
 			{
 				InputController inputForServer;
-				for (uint32 i = lastInputSequenceNumber; i < currentSequenceNumber; ++i)
+				for (uint32 i = inputDataFront; i < currentSequenceNumber; ++i)
 				{
 					InputPacketData& inputPacketData = inputData[i % ArrayCount(inputData)];
 					inputControllerFromInputPacketData(inputPacketData, inputForServer);
@@ -155,7 +152,7 @@ void ModuleNetworkingClient::onPacketReceived(const InputMemoryStream &packet, c
 						myGameObject->behaviour->onInput(inputForServer);
 				}
 
-				lastInputSequenceNumber = currentSequenceNumber;
+				inputDataFront = currentSequenceNumber;
 			}
 		}
 	}
@@ -195,7 +192,6 @@ void ModuleNetworkingClient::onUpdate()
 		}
 
 		// Process more inputs if there's space
-		inputDataFront = lastInputSequenceNumber;
 		if (inputDataBack - inputDataFront < ArrayCount(inputData))
 		{
 			// Pack current input

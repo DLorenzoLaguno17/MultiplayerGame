@@ -13,6 +13,5 @@ enum class ServerMessage : uint8
 	Welcome,
 	Unwelcome,
 	Ping,
-	Replication,
-	Input
+	Replication
 };

@@ -43,11 +43,9 @@ private:
 
 		float secondsSinceLastPacketSent = 0.0f;
 		float secondsSinceLastReplication = 0.0f;
-		ReplicationManagerServer replicationManager;
 
-		// TODO(you): Reliability on top of UDP lab session
+		ReplicationManagerServer replicationManager;
 		DeliveryManager deliveryManager;
-		uint32 lastProcessedInputData = 0;
 
 		uint32 lastInputSequenceNumberReceived = 0;
 		uint32 nextExpectedInputSequenceNumber = 0;

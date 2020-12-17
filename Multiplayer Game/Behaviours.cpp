@@ -92,6 +92,8 @@ void Spaceship::update()
 	lifebar->position = gameObject->position + vec2{ -50.0f, -50.0f };
 	lifebar->size = vec2{ lifeRatio * 80.0f, 5.0f };
 	lifebar->sprite->color = lerp(colorDead, colorAlive, lifeRatio);
+
+	//gameObject->interpolate();
 }
 
 void Spaceship::destroy()

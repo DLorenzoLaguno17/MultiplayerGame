@@ -162,7 +162,6 @@ void ModuleNetworkingServer::onPacketReceived(const InputMemoryStream &packet, c
 			if (proxy != nullptr && IsValid(proxy->gameObject))
 			{
 				// Read input data
-				//packet >> proxy->lastProcessedInputData;
 				while (packet.RemainingByteCount() > 0)
 				{
 					InputPacketData inputData;
@@ -246,30 +245,23 @@ void ModuleNetworkingServer::onUpdate()
 					secondsSinceLastPingToClients = 0.0f;
 				}
 
-				// Every 0.05 seconds we check for actions to replicate				
-				if (clientProxy.secondsSinceLastReplication > 0.05f)
+				// Every 0.1 seconds we check for actions to replicate				
+				if (clientProxy.secondsSinceLastReplication > 0.1f)
 				{
 					OutputMemoryStream replicationPacket;
 					replicationPacket << PROTOCOL_ID;
 					replicationPacket << ServerMessage::Replication;
+					replicationPacket << clientProxy.lastInputSequenceNumberReceived;
 
 					ReplicationDelegate* delegate = new ReplicationDelegate(&clientProxy.replicationManager);
 					clientProxy.deliveryManager.writeSequenceNumber(replicationPacket, delegate);
-					clientProxy.replicationManager.write(replicationPacket);
+					
+					if (clientProxy.replicationManager.replicationCommands.size() > 0)
+						clientProxy.replicationManager.write(replicationPacket);
 
 					sendPacket(replicationPacket, clientProxy.address);
 					clientProxy.secondsSinceLastReplication = 0.0f;
 				}
-
-				// Send redundant input packets
-				//if (clientProxy.secondsSinceLastReplication > 0.05f)
-				{
-					OutputMemoryStream inputPacket;
-					inputPacket << PROTOCOL_ID;
-					inputPacket << ServerMessage::Input;
-					inputPacket << clientProxy.lastInputSequenceNumberReceived;
-					sendPacket(inputPacket, clientProxy.address);
-				//}
 
 				// Don't let the client proxy point to a destroyed game object
 				if (!IsValid(clientProxy.gameObject))

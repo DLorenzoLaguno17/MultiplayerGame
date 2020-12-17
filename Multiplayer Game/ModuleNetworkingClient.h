@@ -59,7 +59,6 @@ private:
 	uint32 inputDataBack = 0;
 
 	// Latency management
-	uint32 lastInputSequenceNumber = 0;
 	float inputDeliveryIntervalSeconds = 0.05f;
 	float secondsSinceLastInputDelivery = 0.0f;
 
