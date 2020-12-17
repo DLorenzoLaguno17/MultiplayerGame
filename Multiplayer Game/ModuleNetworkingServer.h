@@ -49,6 +49,7 @@ private:
 		DeliveryManager deliveryManager;
 		uint32 lastProcessedInputData = 0;
 
+		uint32 lastInputSequenceNumberReceived = 0;
 		uint32 nextExpectedInputSequenceNumber = 0;
 		InputController gamepad;
 	};

@@ -162,7 +162,7 @@ void ModuleNetworkingServer::onPacketReceived(const InputMemoryStream &packet, c
 			if (proxy != nullptr && IsValid(proxy->gameObject))
 			{
 				// Read input data
-				packet >> proxy->lastProcessedInputData;
+				//packet >> proxy->lastProcessedInputData;
 				while (packet.RemainingByteCount() > 0)
 				{
 					InputPacketData inputData;
@@ -179,6 +179,7 @@ void ModuleNetworkingServer::onPacketReceived(const InputMemoryStream &packet, c
 						if (proxy->gameObject->state == GameObject::State::UPDATING)
 							proxy->gameObject->behaviour->onInput(proxy->gamepad);
 						proxy->nextExpectedInputSequenceNumber = inputData.sequenceNumber + 1;
+						proxy->lastInputSequenceNumberReceived = inputData.sequenceNumber;
 					}
 				}
 			}
@@ -261,11 +262,14 @@ void ModuleNetworkingServer::onUpdate()
 				}
 
 				// Send redundant input packets
-				OutputMemoryStream inputPacket;
-				inputPacket << PROTOCOL_ID;
-				inputPacket << ServerMessage::Input;
-				inputPacket << clientProxy.lastProcessedInputData;
-				sendPacket(inputPacket, clientProxy.address);
+				//if (clientProxy.secondsSinceLastReplication > 0.05f)
+				{
+					OutputMemoryStream inputPacket;
+					inputPacket << PROTOCOL_ID;
+					inputPacket << ServerMessage::Input;
+					inputPacket << clientProxy.lastInputSequenceNumberReceived;
+					sendPacket(inputPacket, clientProxy.address);
+				//}
 
 				// Don't let the client proxy point to a destroyed game object
 				if (!IsValid(clientProxy.gameObject))

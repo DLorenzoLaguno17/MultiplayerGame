@@ -137,17 +137,33 @@ void ModuleNetworkingClient::onPacketReceived(const InputMemoryStream &packet, c
 		}
 		// Handle inputs
 		else if (message == ServerMessage::Input)
-			packet >> inputDataFront;
+		{
+			// Server reconciliation
+			uint32 currentSequenceNumber = 0;
+			packet >> currentSequenceNumber;
+
+			GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
+			if (myGameObject && currentSequenceNumber > lastInputSequenceNumber)
+			{
+				InputController inputForServer;
+				for (uint32 i = lastInputSequenceNumber; i < currentSequenceNumber; ++i)
+				{
+					InputPacketData& inputPacketData = inputData[i % ArrayCount(inputData)];
+					inputControllerFromInputPacketData(inputPacketData, inputForServer);
+
+					if (myGameObject->behaviour)
+						myGameObject->behaviour->onInput(inputForServer);
+				}
+
+				lastInputSequenceNumber = currentSequenceNumber;
+			}
+		}
 	}
 }
 
 void ModuleNetworkingClient::onUpdate()
 {
 	if (state == ClientState::Stopped) return;
-
-	// Disconnect the client if the time since the last received packet is greater than 5 seconds
-	if (secondsSinceLastPacketFromServer > DISCONNECT_TIMEOUT_SECONDS)
-		disconnect();
 
 	if (state == ClientState::Connecting)
 	{
@@ -158,6 +174,15 @@ void ModuleNetworkingClient::onUpdate()
 		secondsSinceLastPacketFromServer += Time.deltaTime;
 		secondsSinceLastPingToServer += Time.deltaTime;
 		secondsSinceLastInputDelivery += Time.deltaTime;
+
+		// Client prediction
+		GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
+		if (myGameObject != nullptr && myGameObject->behaviour != nullptr)
+			myGameObject->behaviour->onInput(Input);
+
+		// Disconnect the client if the time since the last received packet is greater than 5 seconds
+		if (secondsSinceLastPacketFromServer > DISCONNECT_TIMEOUT_SECONDS)
+			disconnect();
 
 		// Send a Ping to the server every 0.5 seconds
 		if (secondsSinceLastPingToServer > PING_INTERVAL_SECONDS)
@@ -170,37 +195,35 @@ void ModuleNetworkingClient::onUpdate()
 		}
 
 		// Process more inputs if there's space
+		inputDataFront = lastInputSequenceNumber;
 		if (inputDataBack - inputDataFront < ArrayCount(inputData))
 		{
 			// Pack current input
 			uint32 currentInputData = inputDataBack++;
-			InputPacketData &inputPacketData = inputData[currentInputData % ArrayCount(inputData)];
+			InputPacketData& inputPacketData = inputData[currentInputData % ArrayCount(inputData)];
 			inputPacketData.sequenceNumber = currentInputData;
 			inputPacketData.horizontalAxis = Input.horizontalAxis;
 			inputPacketData.verticalAxis = Input.verticalAxis;
 			inputPacketData.buttonBits = packInputControllerButtons(Input);
-		}
 
-		// Input delivery interval timed out: create a new input packet
-		if (secondsSinceLastInputDelivery > inputDeliveryIntervalSeconds)
-		{
-			OutputMemoryStream packet;
-			packet << PROTOCOL_ID;
-			packet << ClientMessage::Input;
-
-			// TODO(you): Reliability on top of UDP lab session
-			packet << inputDataBack;
-			for (uint32 i = inputDataFront; i < inputDataBack; ++i)
+			// Input delivery interval timed out: create a new input packet
+			if (secondsSinceLastInputDelivery > inputDeliveryIntervalSeconds)
 			{
-				InputPacketData &inputPacketData = inputData[i % ArrayCount(inputData)];
-				packet << inputPacketData.sequenceNumber;
-				packet << inputPacketData.horizontalAxis;
-				packet << inputPacketData.verticalAxis;
-				packet << inputPacketData.buttonBits;
-			}
+				OutputMemoryStream packet;
+				packet << PROTOCOL_ID;
+				packet << ClientMessage::Input;
 
-			sendPacket(packet, serverAddress);
-			secondsSinceLastInputDelivery = 0.0f;
+				for (uint32 i = inputDataFront; i < inputDataBack; ++i)
+				{
+					InputPacketData& inputPacketData = inputData[i % ArrayCount(inputData)];
+					packet << inputPacketData.sequenceNumber;
+					packet << inputPacketData.horizontalAxis;
+					packet << inputPacketData.verticalAxis;
+					packet << inputPacketData.buttonBits;
+				}
+				sendPacket(packet, serverAddress);
+				secondsSinceLastInputDelivery = 0.0f;
+			}
 		}
 
 		// Check pending acknowledgements
@@ -211,8 +234,6 @@ void ModuleNetworkingClient::onUpdate()
 			deliveryManager.writePendingAcks(replicationPacket);
 			sendPacket(replicationPacket, serverAddress);
 		}
-
-		// TODO(you): Latency management lab session
 
 		// Update camera for player
 		GameObject *playerGameObject = App->modLinkingContext->getNetworkGameObject(networkId);

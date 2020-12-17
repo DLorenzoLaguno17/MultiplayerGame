@@ -58,6 +58,8 @@ private:
 	uint32 inputDataFront = 0;
 	uint32 inputDataBack = 0;
 
+	// Latency management
+	uint32 lastInputSequenceNumber = 0;
 	float inputDeliveryIntervalSeconds = 0.05f;
 	float secondsSinceLastInputDelivery = 0.0f;
 
@@ -70,12 +72,6 @@ private:
 
 	// Delivery manager
 	DeliveryManager deliveryManager;
-
-	//////////////////////////////////////////////////////////////////////
-	// Latency management
-	//////////////////////////////////////////////////////////////////////
-
-	// TODO(you): Latency management lab session
 };
 
 // Delivery delegates

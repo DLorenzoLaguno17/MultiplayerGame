@@ -2,6 +2,24 @@
 
 struct GameObject
 {
+public:
+
+	// Serialization & Deserialization
+	void readCreationPacket(const InputMemoryStream& packet);
+	void writeCreationPacket(OutputMemoryStream& packet);
+
+	void readUpdatePacket(const InputMemoryStream& packet);
+	void writeUpdatePacket(OutputMemoryStream& packet);
+
+	void interpolate();
+
+private:
+
+	void* operator new(size_t size) = delete;
+	void operator delete (void* obj) = delete;
+
+public:
+
 	uint32 id;
 
 	// Transform component
@@ -38,17 +56,15 @@ struct GameObject
 	};
 	State state = NON_EXISTING;
 
-	// Serialization & Deserialization
-	void readCreationPacket(const InputMemoryStream& packet);
-	void writeCreationPacket(OutputMemoryStream& packet);
+	// For entity interpolation
+	vec2 initial_position = vec2{ 0.0f, 0.0f };
+	float initial_angle = 0.0f;
 
-	void readUpdatePacket(const InputMemoryStream& packet);
-	void writeUpdatePacket(OutputMemoryStream& packet);
+	vec2 final_position = vec2{ 0.0f, 0.0f };
+	float final_angle = 0.0f;
 
-private:
-
-	void * operator new(size_t size) = delete;
-	void operator delete (void *obj) = delete;
+	float seconds_elapsed = 0.0f;
+	float lastTimeReplication = 0.0f;
 };
 
 class ModuleGameObject : public Module

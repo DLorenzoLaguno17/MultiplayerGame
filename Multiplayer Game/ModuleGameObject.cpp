@@ -1,4 +1,5 @@
 #include "Networks.h"
+#include "math.h"
 
 bool ModuleGameObject::init()
 {
@@ -247,6 +248,19 @@ void GameObject::writeCreationPacket(OutputMemoryStream& packet)
 
 void GameObject::readUpdatePacket(const InputMemoryStream& packet)
 {
+	// Interpolation
+	/*initial_position = position;
+	initial_angle = angle;
+
+	packet >> final_position.x;
+	packet >> final_position.y;
+	packet >> size.x;
+	packet >> size.y;
+	packet >> final_angle;
+
+	seconds_elapsed = Time.time - lastTimeReplication;
+	lastTimeReplication = Time.time;*/
+
 	// Values
 	packet >> position.x;
 	packet >> position.y;
@@ -263,4 +277,13 @@ void GameObject::writeUpdatePacket(OutputMemoryStream& packet)
 	packet << size.x;
 	packet << size.y;
 	packet << angle;
+}
+
+void GameObject::interpolate()
+{
+	//position = initial_position + seconds_elapsed * (final_position - initial_position);
+	//angle = initial_angle + seconds_elapsed * (final_angle - initial_angle);
+
+	position = lerp(initial_position, final_position, seconds_elapsed);
+	angle = lerp(initial_angle, final_angle, seconds_elapsed);
 }
