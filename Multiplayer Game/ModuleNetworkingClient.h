@@ -13,13 +13,15 @@ public:
 	void setPlayerInfo(const char *playerName, uint8 spaceshipType);
 	void sendHelloPacket();
 
+	uint32 getMyNetworkId() { return networkId; }
+	bool isClient() const override { return true; }
+
 private:
 
 	//////////////////////////////////////////////////////////////////////
 	// ModuleNetworking virtual methods
 	//////////////////////////////////////////////////////////////////////
 
-	bool isClient() const override { return true; }
 
 	void onStart() override;
 	void onGui() override;

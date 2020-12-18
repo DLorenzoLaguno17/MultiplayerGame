@@ -11,7 +11,7 @@ public:
 	void readUpdatePacket(const InputMemoryStream& packet);
 	void writeUpdatePacket(OutputMemoryStream& packet);
 
-	void interpolate();
+	void interpolate(float ratio);
 
 private:
 
@@ -64,7 +64,6 @@ public:
 	float final_angle = 0.0f;
 
 	float seconds_elapsed = 0.0f;
-	float lastTimeReplication = 0.0f;
 };
 
 class ModuleGameObject : public Module
