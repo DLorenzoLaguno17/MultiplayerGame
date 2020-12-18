@@ -132,6 +132,11 @@ void GameObject::readCreationPacket(const InputMemoryStream& packet)
 	packet >> size.y;
 	packet >> angle;
 
+	initial_angle = angle;
+	initial_position = position;
+	final_angle = angle;
+	final_position = position;
+
 	// Sprite
 	sprite = App->modRender->addSprite(this);
 	packet >> sprite->pivot.x;

@@ -151,7 +151,6 @@ void ModuleNetworkingServer::onPacketReceived(const InputMemoryStream &packet, c
 						if (gameObject != proxy->gameObject)
 						{
 							proxy->replicationManager.create(gameObject->networkId);
-							proxy->replicationManager.update(gameObject->networkId);
 						}
 					}
 
@@ -406,7 +405,6 @@ GameObject* ModuleNetworkingServer::instantiateNetworkObject()
 		{
 			// TODO(you): World state replication lab session
 			clientProxies[i].replicationManager.create(gameObject->networkId);
-			clientProxies[i].replicationManager.update(gameObject->networkId);
 		}
 	}
 
