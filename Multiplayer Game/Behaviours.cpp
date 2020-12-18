@@ -92,6 +92,17 @@ void Spaceship::update()
 	lifebar->position = gameObject->position + vec2{ -50.0f, -50.0f };
 	lifebar->size = vec2{ lifeRatio * 80.0f, 5.0f };
 	lifebar->sprite->color = lerp(colorDead, colorAlive, lifeRatio);
+
+	// Interpolation
+	if (App->modNetClient->getMyNetworkId() != gameObject->networkId && !isServer)
+	{
+		float ratio = gameObject->seconds_elapsed / 0.05f;
+		if (ratio >= 1.0f)
+			ratio = 1.0f;
+
+		gameObject->interpolate(ratio);
+		gameObject->seconds_elapsed += Time.deltaTime;
+	}
 }
 
 void Spaceship::destroy()

@@ -149,7 +149,10 @@ void ModuleNetworkingServer::onPacketReceived(const InputMemoryStream &packet, c
 
 						// TODO(you): World state replication lab session
 						if (gameObject != proxy->gameObject)
+						{
 							proxy->replicationManager.create(gameObject->networkId);
+							proxy->replicationManager.update(gameObject->networkId);
+						}
 					}
 
 					LOG("Message received: hello - from player %s", proxy->name.c_str());

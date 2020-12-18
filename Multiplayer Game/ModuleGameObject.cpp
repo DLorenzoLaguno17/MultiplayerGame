@@ -31,28 +31,6 @@ bool ModuleGameObject::preUpdate()
 
 bool ModuleGameObject::update()
 {	
-	// Interpolation
-	if (App->modNetClient->isClient())
-	{
-		for (uint32 i = 0; i < MAX_GAME_OBJECTS; ++i)
-		{
-			GameObject& gameObject = App->modGameObject->gameObjects[i];
-
-			if (gameObject.state == GameObject::UPDATING)
-			{
-				/*if (App->modNetClient->getMyNetworkId() != gameObject.networkId && gameObject.behaviour && gameObject.behaviour->type() == BehaviourType::Spaceship )
-				{
-					float ratio = gameObject.seconds_elapsed / 0.05f;
-					if (ratio >= 1.0f)
-						ratio = 1.0f;
-
-					//gameObject.interpolate(ratio);
-					gameObject.seconds_elapsed += Time.deltaTime;
-				}*/
-			}
-		}
-	}
-
 	// Delayed destructions
 	for (DelayedDestroyEntry &destroyEntry : gameObjectsWithDelayedDestruction)
 	{
@@ -271,28 +249,17 @@ void GameObject::writeCreationPacket(OutputMemoryStream& packet)
 void GameObject::readUpdatePacket(const InputMemoryStream& packet)
 {
 	// Interpolation
+	initial_position = position;
+	initial_angle = angle;
 
-	if (App->modNetClient->getMyNetworkId() == networkId)
-	{
-		initial_position = position;
-		initial_angle = angle;
+	packet >> final_position.x;
+	packet >> final_position.y;
+	packet >> size.x;
+	packet >> size.y;
+	packet >> final_angle;
 
-		packet >> final_position.x;
-		packet >> final_position.y;
-		packet >> size.x;
-		packet >> size.y;
-		packet >> final_angle;
-	}
-	else
-	{
-		// Values
-		packet >> position.x;
-		packet >> position.y;
-		packet >> size.x;
-		packet >> size.y;
-		packet >> angle;
-		seconds_elapsed = 0.0f;
-	}
+	if (App->modNetClient->getMyNetworkId() != networkId)
+		seconds_elapsed = 0.0f;	
 }
 
 void GameObject::writeUpdatePacket(OutputMemoryStream& packet)
@@ -309,7 +276,4 @@ void GameObject::interpolate(float ratio)
 {
 	position = initial_position + ratio * (final_position - initial_position);
 	angle = initial_angle + ratio * (final_angle - initial_angle);
-
-	/*position = lerp(initial_position, final_position, ratio);
-	angle = lerp(initial_angle, final_angle, ratio);*/
 }
