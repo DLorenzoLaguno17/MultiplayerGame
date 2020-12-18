@@ -37,7 +37,8 @@ void ReplicationManagerServer::write(OutputMemoryStream& packet)
 			if (updated_object)
 			{
 				updated_object->writeUpdatePacket(packet);
-				updated_object->behaviour->write(packet);
+				if (updated_object->behaviour)
+					updated_object->behaviour->write(packet);
 			}
 		}
 	}

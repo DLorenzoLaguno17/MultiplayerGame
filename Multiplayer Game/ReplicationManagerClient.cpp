@@ -31,7 +31,8 @@ void ReplicationManagerClient::read(const InputMemoryStream& packet)
 			if (updated_object)
 			{
 				updated_object->readUpdatePacket(packet);
-				updated_object->behaviour->read(packet);
+				if (updated_object->behaviour)
+					updated_object->behaviour->read(packet);
 			}
 		}
 	}
