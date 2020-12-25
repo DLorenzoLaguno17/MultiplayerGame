@@ -49,10 +49,10 @@ void ReplicationManagerServer::write(OutputMemoryStream& packet)
 void ReplicationDelegate::onDeliveryFailure(DeliveryManager* deliveryManager)
 {
 	// Resend packet
-	/*for (int i = 0; i < replicationCommands.size(); ++i)
+	for (int i = 0; i < replicationCommands.size(); ++i)
 	{
 		if (replicationCommands[i].action == ReplicationAction::Create 
-			&& App->modLinkingContext->getNetworkGameObject(replicationCommands[i].networkId) == nullptr)
+			&& App->modLinkingContext->getNetworkGameObject(replicationCommands[i].networkId) != nullptr)
 			replicationManager->create(replicationCommands[i].networkId);
 
 		else if (replicationCommands[i].action == ReplicationAction::Update 
@@ -64,5 +64,5 @@ void ReplicationDelegate::onDeliveryFailure(DeliveryManager* deliveryManager)
 			replicationManager->destroy(replicationCommands[i].networkId);
 	}
 
-	replicationCommands.clear();*/
+	replicationCommands.clear();
 }

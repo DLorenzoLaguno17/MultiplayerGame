@@ -189,6 +189,16 @@ void ModuleNetworkingClient::onUpdate()
 			packet << ClientMessage::Ping;
 			sendPacket(packet, serverAddress);
 			secondsSinceLastPingToServer = 0.0f;
+		}		
+
+		// Check pending acknowledgements
+		if (deliveryManager.hasPendingAcks())
+		{
+			OutputMemoryStream replicationPacket;
+			replicationPacket << PROTOCOL_ID;
+			replicationPacket << ClientMessage::ReplicationAck;
+			deliveryManager.writePendingAcks(replicationPacket);
+			sendPacket(replicationPacket, serverAddress);
 		}
 
 		// Process more inputs if there's space
@@ -220,15 +230,6 @@ void ModuleNetworkingClient::onUpdate()
 				sendPacket(packet, serverAddress);
 				secondsSinceLastInputDelivery = 0.0f;
 			}
-		}
-
-		// Check pending acknowledgements
-		if (deliveryManager.hasPendingAcks())
-		{
-			OutputMemoryStream replicationPacket;
-			replicationPacket << ClientMessage::ReplicationAck;
-			deliveryManager.writePendingAcks(replicationPacket);
-			sendPacket(replicationPacket, serverAddress);
 		}
 
 		// Update camera for player
@@ -278,6 +279,11 @@ void ModuleNetworkingClient::onDisconnect()
 void ModuleNetworkingClient::onConnectionReset(const sockaddr_in & fromAddress)
 {
 	disconnect();
+}
+
+void LoginDelegate::onDeliverySuccess(DeliveryManager* deliveryManager) 
+{
+
 }
 
 void LoginDelegate::onDeliveryFailure(DeliveryManager* deliveryManager) 

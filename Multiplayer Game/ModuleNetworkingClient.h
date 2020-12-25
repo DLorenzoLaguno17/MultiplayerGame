@@ -22,7 +22,6 @@ private:
 	// ModuleNetworking virtual methods
 	//////////////////////////////////////////////////////////////////////
 
-
 	void onStart() override;
 	void onGui() override;
 	void onPacketReceived(const InputMemoryStream &packet, const sockaddr_in &fromAddress) override;
@@ -78,6 +77,6 @@ private:
 // Delivery delegates
 class LoginDelegate : public DeliveryDelegate 
 {
-	void onDeliverySuccess(DeliveryManager* deliveryManager) override {}
+	void onDeliverySuccess(DeliveryManager* deliveryManager) override;
 	void onDeliveryFailure(DeliveryManager* deliveryManager) override;
 };

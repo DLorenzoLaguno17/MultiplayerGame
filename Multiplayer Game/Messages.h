@@ -2,7 +2,7 @@
 
 enum class ClientMessage : uint8
 {
-	Hello,
+	Hello = 0,
 	Input,
 	Ping,
 	ReplicationAck
@@ -10,7 +10,7 @@ enum class ClientMessage : uint8
 
 enum class ServerMessage : uint8
 {
-	Welcome,
+	Welcome = 0,
 	Unwelcome,
 	Ping,
 	Replication
