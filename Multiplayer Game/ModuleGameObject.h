@@ -78,11 +78,12 @@ public:
 	bool cleanUp() override;
 
 	static GameObject * Instantiate();
-
 	static void Destroy(GameObject * gameObject);
-
 	static void Destroy(GameObject * gameObject, float delaySeconds);
 
+public:
+
+	float interpolationRatio = 0.065f;
 	GameObject gameObjects[MAX_GAME_OBJECTS] = {};
 
 private:
@@ -95,8 +96,6 @@ private:
 
 	DelayedDestroyEntry gameObjectsWithDelayedDestruction[MAX_GAME_OBJECTS];
 };
-
-// NOTE(jesus): These functions are named after Unity functions
 
 GameObject *Instantiate();
 

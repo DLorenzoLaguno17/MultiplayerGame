@@ -96,7 +96,7 @@ void Spaceship::update()
 	// Interpolation
 	if (App->modNetClient->getMyNetworkId() != gameObject->networkId && !isServer)
 	{
-		float ratio = gameObject->seconds_elapsed / 0.07f;
+		float ratio = gameObject->seconds_elapsed / App->modGameObject->interpolationRatio;
 		if (ratio >= 1.0f)
 			ratio = 1.0f;
 
