@@ -47,6 +47,8 @@ void ModuleNetworkingClient::onStart()
 	inputDataFront = 0;
 	inputDataBack = 0;
 	secondsSinceLastInputDelivery = 0.0f;
+
+	spawned = false;
 }
 
 void ModuleNetworkingClient::onGui()
@@ -237,10 +239,11 @@ void ModuleNetworkingClient::onUpdate()
 		if (playerGameObject != nullptr)
 		{
 			App->modRender->cameraPosition = playerGameObject->position;
+			spawned = true;
 		}
-		else
+		else if (spawned && playerGameObject == nullptr)
 		{
-			// This means that the player has been destroyed (e.g. killed)
+			disconnect();
 		}
 	}
 }
@@ -273,6 +276,7 @@ void ModuleNetworkingClient::onDisconnect()
 		Destroy(networkGameObjects[i]);
 	}
 
+	deliveryManager.clear();
 	App->modRender->cameraPosition = {};
 }
 

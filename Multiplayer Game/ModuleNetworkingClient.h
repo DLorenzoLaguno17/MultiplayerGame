@@ -52,6 +52,7 @@ private:
 
 	uint32 playerId = 0;
 	uint32 networkId = 0;
+	bool spawned = false;
 
 	// Input
 	static const int MAX_INPUT_DATA_SIMULTANEOUS_PACKETS = 64;

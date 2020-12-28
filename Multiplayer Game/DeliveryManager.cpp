@@ -18,10 +18,11 @@ bool DeliveryManager::processSequenceNumber(const InputMemoryStream& packet)
 	uint32 sequenceNumber = 0;
 	packet >> sequenceNumber;
 
-	// Check if it was the expected sequence number
+	// Update values if the received sequence number is higher than expected 
 	if (sequenceNumber > nextExpectedSequenceNumber)
 		nextExpectedSequenceNumber = sequenceNumber;
 
+	// Check if it was the expected sequence number
 	if (sequenceNumber == nextExpectedSequenceNumber)
 	{
 		sequenceNumbersPendingAck.push_back(sequenceNumber);
