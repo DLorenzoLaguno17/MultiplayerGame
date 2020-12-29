@@ -94,7 +94,7 @@ void Spaceship::update()
 	lifebar->sprite->color = lerp(colorDead, colorAlive, lifeRatio);
 
 	// Interpolation
-	if (App->modNetClient->getMyNetworkId() != gameObject->networkId && !isServer)
+	if (App->modNetClient->getMyNetworkId() != gameObject->networkId && App->modNetClient->entityInterpolation && !isServer)
 	{
 		float ratio = gameObject->seconds_elapsed / App->modGameObject->interpolationRatio;
 		if (ratio >= 1.0f)

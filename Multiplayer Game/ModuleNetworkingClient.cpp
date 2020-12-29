@@ -175,9 +175,12 @@ void ModuleNetworkingClient::onUpdate()
 		secondsSinceLastInputDelivery += Time.deltaTime;
 
 		// Client prediction
-		GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
-		if (myGameObject != nullptr && myGameObject->behaviour != nullptr)
-			myGameObject->behaviour->onInput(Input);
+		if (App->modNetClient->clientPrediction)
+		{
+			GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
+			if (myGameObject != nullptr && myGameObject->behaviour != nullptr)
+				myGameObject->behaviour->onInput(Input);
+		}
 
 		// Disconnect the client if the time since the last received packet is greater than 5 seconds
 		if (secondsSinceLastPacketFromServer > DISCONNECT_TIMEOUT_SECONDS)
