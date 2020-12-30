@@ -47,3 +47,5 @@ Only as a Client:
 * Completeness: Totally achieved.
 * Bugs during implementation: There were some problems with the interpolation because we did not quite know how to calculate the interpolation time and the movement of the spaceships were either erratic and abrupt or non-existent. There were bugs on objects creation as well, since they did not appear where they should and did not replace until they received an update.
 * Bug resolution: The first problems were solved by creating a ratio variable which handled the time and ensuring it only affected extern **Clients**. The second bug just required the proper initialization of the interpolation values from each `GameObject`.
+
+### _Implemented by Jacobo Galofre:_
