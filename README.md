@@ -25,8 +25,7 @@ Only as a Client:
 
 ## Feature implementation
 
-Implemented by Dani Lorenzo:
-
+### _Implemented by Dani Lorenzo:_
 ### World State Replication
 
 * Completeness: Totally achieved.
