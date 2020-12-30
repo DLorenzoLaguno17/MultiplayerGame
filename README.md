@@ -25,6 +25,8 @@ Only as a Client:
 
 ## Feature implementation
 
+Implemented by Dani Lorenzo:
+
 ### World State Replication
 
 * Completeness: Totally achieved.
@@ -34,7 +36,7 @@ Only as a Client:
 ### Delivery Manager
 
 * Completeness: Totally achieved.
-* Bugs during implementation: When _Latency / Jitter_ or _Packet Loss_ were activated and then deactivated and some seconds passed, the game crashed since the replication packet memory streams ended up being too big.
+* Bugs during implementation: When _Latency / Jitter_ or _Packet Drops_ were activated and then deactivated and some seconds passed, the game crashed since the replication packet memory streams ended up being too big.
 * Bug resolution: What happened was that activating and deactivating those checkboxes provoked the sequence number of the packets to augment more than what was expected, and the `DeliveryManager` was only programmed to handle packets with a sequence number **equal or lower** than expected. That resulted in packets never being acknowledged and being resent over and over.
 
 ### Client Prediction & Server Reconciliation
@@ -44,5 +46,5 @@ Only as a Client:
 
 ### Entity Interpolation
 * Completeness: Totally achieved.
-* Bugs during implementation: 
-* Bug resolution:
+* Bugs during implementation: There were some problems with the interpolation because we did not quite know how to calculate the interpolation time and the movement of the spaceships were either erratic and abrupt or non-existent. There were bugs on objects creation as well, since they did not appear where they should and did not replace until they received an update.
+* Bug resolution: The first problems were solved by creating a ratio variable which handled the time and ensuring it only affected extern **Clients**. The second bug just required the proper initialization of the interpolation values from each `GameObject`.
