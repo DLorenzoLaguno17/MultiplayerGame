@@ -131,7 +131,6 @@ void GameObject::readCreationPacket(const InputMemoryStream& packet)
 	packet >> size.x;
 	packet >> size.y;
 	packet >> angle;
-	packet >> tag;
 
 	initial_angle = angle;
 	initial_position = position;
@@ -217,7 +216,6 @@ void GameObject::writeCreationPacket(OutputMemoryStream& packet)
 	packet << size.x;
 	packet << size.y;
 	packet << angle;
-	packet << tag;
 
 	// Sprite
 	packet << sprite->pivot.x;

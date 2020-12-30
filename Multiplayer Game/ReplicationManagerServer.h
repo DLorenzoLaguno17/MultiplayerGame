@@ -18,6 +18,7 @@ struct ReplicationCommand
 
 	ReplicationAction action = ReplicationAction::None;
 	uint32 networkId = -1;
+	uint32 destroyerTag = 0;
 };
 
 class ReplicationManagerServer
@@ -25,7 +26,7 @@ class ReplicationManagerServer
 public:
 	void create(uint32 networkId);
 	void update(uint32 networkId);
-	void destroy(uint32 networkId);
+	void destroy(uint32 networkId, uint32 destroyerTag);
 
 	void write(OutputMemoryStream &packet);
 

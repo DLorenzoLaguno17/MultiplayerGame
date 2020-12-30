@@ -12,9 +12,10 @@ void ReplicationManagerServer::update(uint32 networkId)
 	replicationCommands.push_back(newCommand);
 }
 
-void ReplicationManagerServer::destroy(uint32 networkId)
+void ReplicationManagerServer::destroy(uint32 networkId, uint32 destroyerTag)
 {
 	ReplicationCommand newCommand(ReplicationAction::Destroy, networkId);
+	newCommand.destroyerTag = destroyerTag;
 	replicationCommands.insert(replicationCommands.begin(), newCommand);
 }
 
@@ -24,6 +25,7 @@ void ReplicationManagerServer::write(OutputMemoryStream& packet)
 	{
 		packet << replicationCommands[i].action;
 		packet << replicationCommands[i].networkId;
+		packet << replicationCommands[i].destroyerTag;
 
 		// Serialize the values oht the object 
 		if (replicationCommands[i].action == ReplicationAction::Create)
@@ -39,6 +41,7 @@ void ReplicationManagerServer::write(OutputMemoryStream& packet)
 				updated_object->writeUpdatePacket(packet);
 				updated_object->behaviour->write(packet);
 			}
+
 		}
 	}
 
@@ -61,7 +64,7 @@ void ReplicationDelegate::onDeliveryFailure(DeliveryManager* deliveryManager)
 
 		else if (replicationCommands[i].action == ReplicationAction::Destroy 
 			&& App->modLinkingContext->getNetworkGameObject(replicationCommands[i].networkId) == nullptr)
-			replicationManager->destroy(replicationCommands[i].networkId);
+			replicationManager->destroy(replicationCommands[i].networkId, replicationCommands[i].destroyerTag);
 	}
 
 	replicationCommands.clear();

@@ -432,7 +432,7 @@ void ModuleNetworkingServer::destroyNetworkObject(GameObject* gameObject)
 		if (clientProxies[i].connected)
 		{
 			// TODO(you): World state replication lab session
-			clientProxies[i].replicationManager.destroy(gameObject->networkId);
+			clientProxies[i].replicationManager.destroy(gameObject->networkId, gameObject->destroyerTag);
 		}
 	}
 

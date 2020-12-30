@@ -132,10 +132,9 @@ void Spaceship::onCollisionTriggered(Collider &c1, Collider &c2)
 				// Centered big explosion
 				size = 250.0f + 100.0f * Random.next();
 				position = gameObject->position;
-				if (c2.gameObject->tag == App->modLinkingContext->getNetworkGameObject(App->modNetClient->getMyNetworkId())->tag)
-				{
-					App->modNetClient->playerKills++;
-				}
+
+				gameObject->destroyerTag = c2.gameObject->tag;
+
 				NetworkDestroy(gameObject);
 			}
 
