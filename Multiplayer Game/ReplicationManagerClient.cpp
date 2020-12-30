@@ -22,8 +22,8 @@ void ReplicationManagerClient::read(const InputMemoryStream& packet)
 				App->modLinkingContext->unregisterNetworkGameObject(destroyed_object);
 				Destroy(destroyed_object);
 
-				GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(App->modNetClient->getMyNetworkId());
-				if (myGameObject->tag == destroyerTag)
+				
+				if (App->modNetClient->clientGameObject != nullptr && App->modNetClient->clientGameObject->tag == destroyerTag)
 					App->modNetClient->playerKills++;
 			}
 		}

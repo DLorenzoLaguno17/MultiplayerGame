@@ -13,7 +13,7 @@ public:
 	void setPlayerInfo(const char *playerName, uint8 spaceshipType);
 	void sendHelloPacket();
 
-	uint32 getMyNetworkId() { return networkId; }
+	uint32 getMyNetworkId() const { return networkId; }
 	bool isClient() const override { return true; }
 
 private:
@@ -73,9 +73,13 @@ private:
 	// Delivery manager
 	DeliveryManager deliveryManager;
 
+
+	bool IspopupUp = false;
 public:
 	std::string playerName = "player";
 	int playerKills = 0;
+	GameObject* clientGameObject = nullptr;
+	GameObject* popUp = nullptr;
 };
 
 // Delivery delegates

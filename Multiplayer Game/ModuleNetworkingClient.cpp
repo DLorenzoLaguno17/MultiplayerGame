@@ -141,8 +141,8 @@ void ModuleNetworkingClient::onPacketReceived(const InputMemoryStream &packet, c
 				replicationManager.read(packet);
 
 			// Server reconciliation
-			GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
-			if (myGameObject && currentSequenceNumber > inputDataFront)
+			clientGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
+			if (clientGameObject && currentSequenceNumber > inputDataFront)
 			{
 				InputController inputForServer;
 				for (uint32 i = inputDataFront; i < currentSequenceNumber; ++i)
@@ -150,8 +150,8 @@ void ModuleNetworkingClient::onPacketReceived(const InputMemoryStream &packet, c
 					InputPacketData& inputPacketData = inputData[i % ArrayCount(inputData)];
 					inputControllerFromInputPacketData(inputPacketData, inputForServer);
 
-					if (myGameObject->behaviour)
-						myGameObject->behaviour->onInput(inputForServer);
+					if (clientGameObject->behaviour)
+						clientGameObject->behaviour->onInput(inputForServer);
 				}
 
 				inputDataFront = currentSequenceNumber;
@@ -177,9 +177,9 @@ void ModuleNetworkingClient::onUpdate()
 		// Client prediction
 		if (App->modNetClient->clientPrediction)
 		{
-			GameObject* myGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
-			if (myGameObject != nullptr && myGameObject->behaviour != nullptr)
-				myGameObject->behaviour->onInput(Input);
+			clientGameObject = App->modLinkingContext->getNetworkGameObject(networkId);
+			if (clientGameObject != nullptr && clientGameObject->behaviour != nullptr)
+				clientGameObject->behaviour->onInput(Input);
 		}
 
 		// Disconnect the client if the time since the last received packet is greater than 5 seconds
@@ -243,23 +243,28 @@ void ModuleNetworkingClient::onUpdate()
 		{
 			App->modRender->cameraPosition = playerGameObject->position;
 			spawned = true;
+
+			IspopupUp = false;
 		}
 		else if (spawned && playerGameObject == nullptr)
 		{
-			
-			GameObject* gameObject = Instantiate();
-			gameObject->position = { App->modRender->cameraPosition.x + 200, App->modRender->cameraPosition.y + 200 };
-			//gameObject->size = { 100, 100 };
+			if (IspopupUp == false)
+			{
+				popUp = Instantiate();
+				popUp->position = { App->modRender->cameraPosition.x , App->modRender->cameraPosition.y };
+				//gameObject->size = { 100, 100 };
 
-			// Create sprite
-			gameObject->sprite = App->modRender->addSprite(gameObject);
-			gameObject->sprite->order = 5;
-			gameObject->sprite->texture = App->modResources->popUp;
+				// Create sprite
+				popUp->sprite = App->modRender->addSprite(popUp);
+				popUp->sprite->order = 5;
+				popUp->sprite->texture = App->modResources->popUp;
 
-			// Create collider
-			gameObject->collider = App->modCollision->addCollider(ColliderType::PopUp, gameObject);
-			gameObject->collider->isTrigger = true; // NOTE(jesus): This object will receive onCollisionTriggered events
+				// Create collider
+				popUp->collider = App->modCollision->addCollider(ColliderType::PopUp, popUp);
+				popUp->collider->isTrigger = true; // NOTE(jesus): This object will receive onCollisionTriggered events
 
+				IspopupUp = true;
+			}
 
 			
 			//disconnect();
@@ -296,6 +301,7 @@ void ModuleNetworkingClient::onDisconnect()
 	}
 
 	deliveryManager.clear();
+	Destroy(popUp);
 	App->modRender->cameraPosition = {};
 }
 
