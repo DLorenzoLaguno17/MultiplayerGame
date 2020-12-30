@@ -1,7 +1,7 @@
 
 # Multiplayer Game
 
-__ is a simple multiplayer game which consists in shooting to death all the other players on the room!
+__ is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre which consists in shooting to death all the other players on the room!
 
 ## Project features
 
@@ -39,13 +39,26 @@ Only as a Client:
 * Bug resolution: What happened was that activating and deactivating those checkboxes provoked the sequence number of the packets to augment more than what was expected, and the `DeliveryManager` was only programmed to handle packets with a sequence number **equal or lower** than expected. That resulted in packets never being acknowledged and being resent over and over.
 
 ### Client Prediction & Server Reconciliation
+
 * Completeness: Totally achieved.
 * Bugs during implementation: The first time we implemented the **Client** prediction the player had a weird flicker, which increased proportionaly with _Latency / Jitter_.
 * Bug resolution: That flicker was actually due to a bad implementation. There was a mess because the **Client** was trying to do both the predction and the old replication procedure at the same time, resulting in that strange behaviour.
 
 ### Entity Interpolation
+
 * Completeness: Totally achieved.
 * Bugs during implementation: There were some problems with the interpolation because we did not quite know how to calculate the interpolation time and the movement of the spaceships were either erratic and abrupt or non-existent. There were bugs on objects creation as well, since they did not appear where they should and did not replace until they received an update.
 * Bug resolution: The first problems were solved by creating a ratio variable which handled the time and ensuring it only affected extern **Clients**. The second bug just required the proper initialization of the interpolation values from each `GameObject`.
 
 ### _Implemented by Jacobo Galofre:_
+### Accept a certain number of players
+
+* Completeness: 
+* Bugs during implementation: 
+* Bug resolution: 
+
+### Handle players joining & leaving
+
+* Completeness: 
+* Bugs during implementation: 
+* Bug resolution: 
