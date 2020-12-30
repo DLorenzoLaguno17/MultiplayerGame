@@ -193,6 +193,12 @@ bool ModuleNetworking::gui()
 				ImGui::Text(" # Dropped packets: %d", simulatedPacketsDropped);
 				ImGui::Text(" # Received packets: %d", simulatedPacketsReceived);
 			}
+			if (isClient())
+			{
+				ImGui::Separator();
+				ImGui::Checkbox("Client side prediction", &clientPrediction);
+				ImGui::Checkbox("Entity interpolation", &entityInterpolation);
+			}
 
 			ImGui::Text("Simulated buffer usage: %d%%", 100 * pendingSimulatedPacketsCount / MAX_SIMULATED_PACKETS);
 		}

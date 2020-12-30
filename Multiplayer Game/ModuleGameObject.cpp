@@ -261,8 +261,15 @@ void GameObject::readUpdatePacket(const InputMemoryStream& packet)
 	packet >> size.y;
 	packet >> final_angle;
 
+	if ((!App->modNetClient->clientPrediction && App->modNetClient->getMyNetworkId() == networkId) 
+		|| (!App->modNetClient->entityInterpolation && App->modNetClient->getMyNetworkId() != networkId))
+	{
+		position = final_position;
+		angle = final_angle;
+	}
+
 	if (App->modNetClient->getMyNetworkId() != networkId)
-		seconds_elapsed = 0.0f;	
+		seconds_elapsed = 0.0f;
 }
 
 void GameObject::writeUpdatePacket(OutputMemoryStream& packet)

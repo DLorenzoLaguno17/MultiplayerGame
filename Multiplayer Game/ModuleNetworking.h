@@ -54,6 +54,11 @@ private:
 	virtual void onDisconnect() = 0;
 	virtual void onConnectionReset(const sockaddr_in &fromAddress) = 0;
 
+public:
+
+	bool entityInterpolation = true;
+	bool clientPrediction = true;
+
 private:
 
 	//////////////////////////////////////////////////////////////////////
