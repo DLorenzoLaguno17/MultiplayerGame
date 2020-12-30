@@ -17,22 +17,20 @@ bool ModuleResources::init()
 
 #if !defined(USE_TASK_MANAGER)
 	space = App->modTextures->loadTexture("space_background.jpg");
-	asteroid1 = App->modTextures->loadTexture("asteroid1.png");
-	asteroid2 = App->modTextures->loadTexture("asteroid2.png");
 	spacecraft1 = App->modTextures->loadTexture("spacecraft1.png");
 	spacecraft2 = App->modTextures->loadTexture("spacecraft2.png");
 	spacecraft3 = App->modTextures->loadTexture("spacecraft3.png");
+	popUp = App->modTextures->loadTexture("popUp.png");
 	loadingFinished = true;
 	completionRatio = 1.0f;
 #else
 	loadTextureAsync("space_background.jpg", &space);
-	loadTextureAsync("asteroid1.png",        &asteroid1);
-	loadTextureAsync("asteroid2.png",        &asteroid2);
 	loadTextureAsync("spacecraft1.png",      &spacecraft1);
 	loadTextureAsync("spacecraft2.png",      &spacecraft2);
 	loadTextureAsync("spacecraft3.png",      &spacecraft3);
 	loadTextureAsync("laser.png",            &laser);
 	loadTextureAsync("explosion1.png",       &explosion1);
+	loadTextureAsync("PopUp.png",			&popUp);
 #endif
 
 	audioClipLaser = App->modSound->loadAudioClip("laser.wav");

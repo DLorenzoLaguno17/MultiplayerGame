@@ -78,6 +78,7 @@ void Spaceship::onInput(const InputController &input)
 
 			Laser *laserBehaviour = App->modBehaviour->addLaser(laser);
 			laserBehaviour->isServer = isServer;
+			//laserBehaviour->playerID = gameObject
 
 			laser->tag = gameObject->tag;
 		}
@@ -108,6 +109,7 @@ void Spaceship::update()
 void Spaceship::destroy()
 {
 	Destroy(lifebar);
+	App->modNetClient->playerKills++;
 }
 
 void Spaceship::onCollisionTriggered(Collider &c1, Collider &c2)

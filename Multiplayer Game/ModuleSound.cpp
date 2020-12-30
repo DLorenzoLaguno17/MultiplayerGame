@@ -339,10 +339,10 @@ AudioClip * ModuleSound::loadAudioClip(const char * filename)
 				{
 				case RIFF_fmt:
 					fread(&Fmt, Chunk.Size, 1, file);
-					ASSERT(Fmt.AudioFormat == 1); // 1 means PCM
-					ASSERT(Fmt.SampleRate == 48000);
-					ASSERT(Fmt.NumChannels == 2);
-					ASSERT(Fmt.BitsPerSample == 16);
+					//ASSERT(Fmt.AudioFormat == 1); // 1 means PCM
+					//ASSERT(Fmt.SampleRate == 48000);
+					//ASSERT(Fmt.NumChannels == 2);
+					//ASSERT(Fmt.BitsPerSample == 16);
 					break;
 				case RIFF_data:
 					ASSERT(data == nullptr);

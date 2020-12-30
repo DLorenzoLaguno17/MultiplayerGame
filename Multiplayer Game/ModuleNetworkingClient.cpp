@@ -243,7 +243,23 @@ void ModuleNetworkingClient::onUpdate()
 		}
 		else if (spawned && playerGameObject == nullptr)
 		{
-			disconnect();
+			
+			GameObject* gameObject = Instantiate();
+			gameObject->position = { App->modRender->cameraPosition.x + 200, App->modRender->cameraPosition.y + 200 };
+			//gameObject->size = { 100, 100 };
+
+			// Create sprite
+			gameObject->sprite = App->modRender->addSprite(gameObject);
+			gameObject->sprite->order = 5;
+			gameObject->sprite->texture = App->modResources->popUp;
+
+			// Create collider
+			gameObject->collider = App->modCollision->addCollider(ColliderType::PopUp, gameObject);
+			gameObject->collider->isTrigger = true; // NOTE(jesus): This object will receive onCollisionTriggered events
+
+
+			
+			//disconnect();
 		}
 	}
 }

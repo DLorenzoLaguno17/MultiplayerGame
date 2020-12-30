@@ -161,10 +161,8 @@ void GameObject::readCreationPacket(const InputMemoryStream& packet)
 		sprite->texture = App->modResources->laser;
 	else if (filename == "explosion1.png")
 		sprite->texture = App->modResources->explosion1;
-	else if (filename == "asteroid1.png")
-		sprite->texture = App->modResources->asteroid1;
-	else if (filename == "asteroid2.png")
-		sprite->texture = App->modResources->asteroid2;
+	else if (filename == "popUp.png")
+		sprite->texture = App->modResources->popUp;
 
 	// Collider
 	ColliderType col_type = ColliderType::None;

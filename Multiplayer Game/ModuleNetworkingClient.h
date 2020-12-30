@@ -47,7 +47,6 @@ private:
 	uint16 serverPort = 0;
 
 	sockaddr_in serverAddress = {};
-	std::string playerName = "player";
 	uint8 spaceshipType = 0;
 
 	uint32 playerId = 0;
@@ -73,6 +72,10 @@ private:
 
 	// Delivery manager
 	DeliveryManager deliveryManager;
+
+public:
+	std::string playerName = "player";
+	int playerKills = 0;
 };
 
 // Delivery delegates
