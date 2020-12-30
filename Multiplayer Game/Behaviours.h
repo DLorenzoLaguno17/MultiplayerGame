@@ -29,7 +29,6 @@ struct Behaviour
 struct Laser : public Behaviour
 {
 	float secondsSinceCreation = 0.0f;
-	int playerID = 0;
 
 	BehaviourType type() const override { return BehaviourType::Laser; }
 

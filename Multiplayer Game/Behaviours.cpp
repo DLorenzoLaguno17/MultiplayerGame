@@ -78,7 +78,6 @@ void Spaceship::onInput(const InputController &input)
 
 			Laser *laserBehaviour = App->modBehaviour->addLaser(laser);
 			laserBehaviour->isServer = isServer;
-			//laserBehaviour->playerID = gameObject
 
 			laser->tag = gameObject->tag;
 		}
@@ -109,7 +108,6 @@ void Spaceship::update()
 void Spaceship::destroy()
 {
 	Destroy(lifebar);
-	App->modNetClient->playerKills++;
 }
 
 void Spaceship::onCollisionTriggered(Collider &c1, Collider &c2)
@@ -134,7 +132,10 @@ void Spaceship::onCollisionTriggered(Collider &c1, Collider &c2)
 				// Centered big explosion
 				size = 250.0f + 100.0f * Random.next();
 				position = gameObject->position;
-
+				if (c2.gameObject->tag == App->modLinkingContext->getNetworkGameObject(App->modNetClient->getMyNetworkId())->tag)
+				{
+					App->modNetClient->playerKills++;
+				}
 				NetworkDestroy(gameObject);
 			}
 
