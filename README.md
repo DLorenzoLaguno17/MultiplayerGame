@@ -27,6 +27,7 @@ Only as a Client:
 
 ### Dani Lorenzo
 * **World State Replication**
+
 Completeness: Totally achieved.
 
 Bugs during implementation: At the beginning, when we replicated the creation of a GameObject it appeared twice in the client, and the size was not the appropiate. Furthermore, I could not replicate the hp of the spaceship and the game crashed when a spaceship died. 
@@ -34,6 +35,7 @@ Bugs during implementation: At the beginning, when we replicated the creation of
 Bug resolution: The first two bugs were really easy to fix. For the hp, I realized I needed to call the write()/read() methods of the behaviours in the ReplicationManager. To avoid the crashes, I programmed that, everytime there was _Destroy_ action in the replication commands, it was inserted at the beggining of the list. 
 
 * **Delivery Manager**
+
 Completeness: Totally achieved.
 
 Bugs during implementation: When Latency/Jitter or Packet Loss were activated and then deactivated and some seconds passed, the game crashed since the replication packet memory streams ended up being too big.
