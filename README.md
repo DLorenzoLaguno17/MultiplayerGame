@@ -19,8 +19,8 @@ With keyboard:
 * Simulate packet drops.
 
 Only as a Client:
-* Activcate/deactivate client side prediction.
-* Activcate/deactivate entity interpolation.
+* Activate/deactivate client side prediction.
+* Activate/deactivate entity interpolation.
 * Change input delivery interval.
 
 ## Feature implementation
@@ -62,4 +62,5 @@ Only as a Client:
 * Completeness: Almost totally achieved with bug pending.
 * Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of `proxys` of the **Server**. Furthermore every time the same **Client** tried to reconnect the server took longer to process the `packets`.
 * Bug resolution: For the first bug, we made sure that on the `onDisconnect()` function we deleted what we needed to and for the second bug we found it was not working because we missed a `clear()` and the reset of the `DeliveryManager` when disconnecting the **Client**.
-* Known bugs: When disconnecting from **server** and reconecting, the server crashes.
+* Known bugs: When we disconnect the **Server** while it has connected clients everything disconnects properly. But then, when we try to create the **Server** again it crashes.
+
