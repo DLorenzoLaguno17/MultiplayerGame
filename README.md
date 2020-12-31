@@ -28,10 +28,10 @@ Only as a Client:
 ### _Implemented by Dani Lorenzo:_
 ### Delivery Manager
 
-* Completeness: Totally achieved.
+* Completeness: Almost totally achieved.
 * Bugs during implementation: When _Latency / Jitter_ or _Packet Drops_ were activated and then deactivated and some seconds passed, the game crashed since the replication packet memory streams ended up being too big.
 * Bug resolution: What happened was that activating and deactivating those checkboxes provoked the sequence number of the packets to augment more than what was expected, and the `DeliveryManager` was only programmed to handle packets with a sequence number **equal or lower** than expected. That resulted in packets never being acknowledged and being resent over and over.
-* Known bugs: When playing as a local player against online players, the games sometimes crashes (in the local **Client**) due to an excess of memory used on a packet. We have not found which is the problem.
+* Known bug: When playing as a local player against online players, the games sometimes crashes (in the local **Client**) due to an excess of memory used on a packet. We have not found which is the problem.
 
 ### Client Prediction & Server Reconciliation
 
@@ -63,5 +63,4 @@ Only as a Client:
 * Completeness: Almost totally achieved with bug pending.
 * Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of `proxys` of the **Server**. Furthermore every time the same **Client** tried to reconnect the server took longer to process the `packets`.
 * Bug resolution: For the first bug, we made sure that on the `onDisconnect()` function we deleted what we needed to and for the second bug we found it was not working because we missed a `clear()` and the reset of the `DeliveryManager` when disconnecting the **Client**.
-* Known bugs: When we disconnect the **Server** while it has connected clients everything disconnects properly. But then, when we try to create the **Server** again it crashes.
-
+* Known bug: When we disconnect the **Server** while it has connected clients everything disconnects properly. But then, when we try to create the **Server** again it crashes.
