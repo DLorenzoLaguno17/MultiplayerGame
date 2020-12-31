@@ -131,6 +131,7 @@ void GameObject::readCreationPacket(const InputMemoryStream& packet)
 	packet >> size.x;
 	packet >> size.y;
 	packet >> angle;
+	packet >> tag;
 
 	initial_angle = angle;
 	initial_position = position;
@@ -216,6 +217,7 @@ void GameObject::writeCreationPacket(OutputMemoryStream& packet)
 	packet << size.x;
 	packet << size.y;
 	packet << angle;
+	packet << tag;
 
 	// Sprite
 	packet << sprite->pivot.x;
@@ -260,6 +262,7 @@ void GameObject::readUpdatePacket(const InputMemoryStream& packet)
 	packet >> size.x;
 	packet >> size.y;
 	packet >> final_angle;
+	packet >> tag;
 
 	if ((!App->modNetClient->clientPrediction && App->modNetClient->getMyNetworkId() == networkId) 
 		|| (!App->modNetClient->entityInterpolation && App->modNetClient->getMyNetworkId() != networkId))
@@ -280,6 +283,7 @@ void GameObject::writeUpdatePacket(OutputMemoryStream& packet)
 	packet << size.x;
 	packet << size.y;
 	packet << angle;
+	packet << tag;
 }
 
 void GameObject::interpolate(float ratio)

@@ -78,8 +78,8 @@ private:
 public:
 	std::string playerName = "player";
 	int playerKills = 0;
-	GameObject* clientGameObject = nullptr;
 	GameObject* popUp = nullptr;
+	GameObject* clientGameObject = nullptr;
 };
 
 // Delivery delegates
