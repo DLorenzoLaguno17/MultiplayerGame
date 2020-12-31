@@ -56,12 +56,12 @@ Only as a Client:
 ### Reskin of the game
 
 * Completeness: Partially achieved.
-* Bugs during implementation: When changing some audio files the project crashed because it didn't accept the sample rate from the .wav files we tried to use.
-* Bug resolution: Modify the .wav files using audacity so it fitted the sample rate.
+* Bugs during implementation: When changing some audio files the project crashed because it didn't accept the sample rate from the `.wav` files we tried to use.
+* Bug resolution: Modify the `.wav` files using audacity so it fitted the sample rate.
 
 ### Handle players joining & leaving
 
 * Completeness: Totally achieved with bug pending
-* Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of prxys of the server. Furthermore every time the same client tried to reconnect the server took longer to process the packets.
-* Bug resolution: For the first bug, we made sure that on the OnDisconnect() function we deleted what we needed to and for the second bug we found it was not working because we missed a clear() and the reset of the delivery manager when disconnecting the client.
-* Known bugs: When disconnecting from server and reconecting, the server crashes.
+* Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of `prxys` of the **server**. Furthermore every time the same **client** tried to reconnect the server took longer to process the `packets`.
+* Bug resolution: For the first bug, we made sure that on the `OnDisconnect()` function we deleted what we needed to and for the second bug we found it was not working because we missed a `clear()` and the reset of the `delivery manager` when disconnecting the **client**.
+* Known bugs: When disconnecting from **server** and reconecting, the server crashes.
