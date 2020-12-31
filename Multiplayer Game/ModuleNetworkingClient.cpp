@@ -301,7 +301,10 @@ void ModuleNetworkingClient::onDisconnect()
 	}
 
 	deliveryManager.clear();
-	Destroy(popUp);
+
+	if(popUp != nullptr)
+		Destroy(popUp);
+
 	App->modRender->cameraPosition = {};
 }
 
