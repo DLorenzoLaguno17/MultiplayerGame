@@ -208,13 +208,8 @@ bool ModuleNetworking::gui()
 		ImGui::End();
 
 		ImGui::Begin("Kill Counter");
-
-		ImGui::Text(" Player Name:");
-		ImGui::Text(" %s", App->modNetClient->playerName.c_str());
-
-		ImGui::Text(" Number of kills:");
-		ImGui::Text(" %i", App->modNetClient->playerKills);
-
+		ImGui::Text(" User: %s", App->modNetClient->playerName.c_str());
+		ImGui::Text(" Kills: %i", App->modNetClient->playerKills);
 		ImGui::End();
 	}
 
