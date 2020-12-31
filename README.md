@@ -1,7 +1,9 @@
 
-# Multiplayer Game
+# DOS Attack Game
 
-__ is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre which consists in shooting to death all the other players on the room!
+__ is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre.
+
+In the game you will be controlling a computer system that surfs through a network and battleing with up to 4 other players to see which one can get more kills. The objective is to perform a Denial-of-service or DOS attack to the other computer systems that are connected to the web until you shut them down by overflowing their request systems, to do so you will be able to move your computer system through the network and send (shoot) ping requests to the other systems.
 
 ## Project features
 
@@ -26,12 +28,6 @@ Only as a Client:
 ## Feature implementation
 
 ### _Implemented by Dani Lorenzo:_
-### World State Replication
-
-* Completeness: Totally achieved.
-* Bugs during implementation: At the beginning, when we replicated the creation of a `GameObject` it appeared twice in the client, and the size was not the appropiate. Furthermore, I could not replicate the hp of the spaceship and the game crashed when a spaceship died. 
-* Bug resolution: The first two bugs were really easy to fix. For the hp, I realized I needed to call the `write() / read()` methods of the behaviours in the `ReplicationManager`. To avoid the crashes, I programmed that, everytime there was **Destroy** action in the replication commands, it was inserted at the beggining of the list. 
-
 ### Delivery Manager
 
 * Completeness: Totally achieved.
@@ -51,14 +47,21 @@ Only as a Client:
 * Bug resolution: The first problems were solved by creating a ratio variable which handled the time and ensuring it only affected extern **Clients**. The second bug just required the proper initialization of the interpolation values from each `GameObject`.
 
 ### _Implemented by Jacobo Galofre:_
-### Accept a certain number of players
+### World State Replication
 
-* Completeness: 
-* Bugs during implementation: 
-* Bug resolution: 
+* Completeness: Totally achieved.
+* Bugs during implementation: At the beginning, when we replicated the creation of a `GameObject` it appeared twice in the client, and the size was not the appropiate. Furthermore, I could not replicate the hp of the spaceship and the game crashed when a spaceship died. 
+* Bug resolution: The first two bugs were really easy to fix. For the hp, I realized I needed to call the `write() / read()` methods of the behaviours in the `ReplicationManager`. To avoid the crashes, I programmed that, everytime there was **Destroy** action in the replication commands, it was inserted at the beggining of the list. 
+
+### Reskin of the game
+
+* Completeness: Partially achieved.
+* Bugs during implementation: When changing some audio files the project crashed because it didn't accept the sample rate from the .wav files we tried to use.
+* Bug resolution: Modify the .wav files using audacity so it fitted the sample rate.
 
 ### Handle players joining & leaving
 
-* Completeness: 
-* Bugs during implementation: 
-* Bug resolution: 
+* Completeness: Totally achieved with bug pending
+* Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of prxys of the server. Furthermore every time the same client tried to reconnect the server took longer to process the packets.
+* Bug resolution: For the first bug, we made sure that on the OnDisconnect() function we deleted what we needed to and for the second bug we found it was not working because we missed a clear() and the reset of the delivery manager when disconnecting the client.
+* Known bugs: When disconnecting from server and reconecting, the server crashes.
