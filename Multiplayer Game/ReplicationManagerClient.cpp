@@ -27,9 +27,15 @@ void ReplicationManagerClient::read(const InputMemoryStream& packet)
 		}
 		else if (newAction == ReplicationAction::Create)
 		{
-			GameObject* newObject = App->modGameObject->Instantiate();
-			App->modLinkingContext->registerNetworkGameObjectWithNetworkId(newObject, networkId);
-			newObject->readCreationPacket(packet);
+			bool mustCreate = false;
+			packet >> mustCreate;
+
+			if (mustCreate)
+			{
+				GameObject* newObject = App->modGameObject->Instantiate();
+				App->modLinkingContext->registerNetworkGameObjectWithNetworkId(newObject, networkId);
+				newObject->readCreationPacket(packet);
+			}
 		}
 		else if (newAction == ReplicationAction::Update)
 		{

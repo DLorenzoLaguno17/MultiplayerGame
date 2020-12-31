@@ -24,7 +24,7 @@ void ScreenMainMenu::gui()
 	ImGui::Text("Server");
 
 	static int localServerPort = 8888;
-	ImGui::InputInt("Server port", &localServerPort);
+	ImGui::InputInt("Local server port", &localServerPort);
 
 	if (ImGui::Button("Start server"))
 	{
@@ -43,7 +43,7 @@ void ScreenMainMenu::gui()
 	ImGui::InputText("Server address", serverAddressStr, sizeof(serverAddressStr));
 
 	static int remoteServerPort = 8888;
-	ImGui::InputInt("Server port", &remoteServerPort);
+	ImGui::InputInt("Remote server port", &remoteServerPort);
 
 	static char playerNameStr[64] = "";
 	ImGui::InputText("Player name", playerNameStr, sizeof(playerNameStr));

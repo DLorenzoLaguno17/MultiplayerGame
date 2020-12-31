@@ -31,7 +31,13 @@ void ReplicationManagerServer::write(OutputMemoryStream& packet)
 		if (replicationCommands[i].action == ReplicationAction::Create)
 		{
 			GameObject* created_object = App->modLinkingContext->getNetworkGameObject(replicationCommands[i].networkId);
-			created_object->writeCreationPacket(packet);
+			if (created_object)
+			{
+				packet << true;
+				created_object->writeCreationPacket(packet);
+			}
+			else
+				packet << false;
 		}
 		else if (replicationCommands[i].action == ReplicationAction::Update)
 		{
