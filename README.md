@@ -31,6 +31,7 @@ Only as a Client:
 * Completeness: Totally achieved.
 * Bugs during implementation: When _Latency / Jitter_ or _Packet Drops_ were activated and then deactivated and some seconds passed, the game crashed since the replication packet memory streams ended up being too big.
 * Bug resolution: What happened was that activating and deactivating those checkboxes provoked the sequence number of the packets to augment more than what was expected, and the `DeliveryManager` was only programmed to handle packets with a sequence number **equal or lower** than expected. That resulted in packets never being acknowledged and being resent over and over.
+* Known bugs: When playing as a local player against online players, the games sometimes crashes (in the local **Client**) due to an excess of memory used on a packet. We have not found which is the problem.
 
 ### Client Prediction & Server Reconciliation
 
