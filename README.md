@@ -1,7 +1,7 @@
 
 # DOS Attack
 
-DOS Attack is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre. In it you will be controlling a computer system that surfs through a network and battleing with up to 4 other players to see which one can get more kills. The objective is to perform a Denial-of-Service (or DOS) attack to the other computer systems that are connected to the web until you shut them down by overflowing their request systems, to do so you will be able to move your computer system through the network and send (shoot) ping requests to the other systems.
+DOS Attack is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre. In it you will be controlling a computer system that surfs through a network and battleing with up to 4 other players to see which one can get more kills. The objective is to perform a Denial-of-Service (or DOS) attack to the other computer systems that are connected to the web until you shut them down by overflowing their request systems. To do so, you will be able to move your computer system through the network and send (shoot) ping requests to the other systems.
 
 ## Project features
 
@@ -10,8 +10,8 @@ DOS Attack is a simple multiplayer game developed by 4th grade students Daniel L
 With keyboard:
 * A - Rotate left.
 * D - Rotate right.
-* Left arrow - Move forwards.
-* Down arrow - Shoot.
+* Left arrow - Shoot.
+* Down arrow - Move forwards.
 
 ### Network testing options
 
