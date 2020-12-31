@@ -1,9 +1,7 @@
 
-# DOS Attack Game
+# DOS Attack
 
-__ is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre.
-
-In the game you will be controlling a computer system that surfs through a network and battleing with up to 4 other players to see which one can get more kills. The objective is to perform a Denial-of-service or DOS attack to the other computer systems that are connected to the web until you shut them down by overflowing their request systems, to do so you will be able to move your computer system through the network and send (shoot) ping requests to the other systems.
+DOS Attack is a simple multiplayer game developed by 4th grade students Daniel Lorenzo and Jacobo Galofre. In it you will be controlling a computer system that surfs through a network and battleing with up to 4 other players to see which one can get more kills. The objective is to perform a Denial-of-Service (or DOS) attack to the other computer systems that are connected to the web until you shut them down by overflowing their request systems, to do so you will be able to move your computer system through the network and send (shoot) ping requests to the other systems.
 
 ## Project features
 
@@ -61,7 +59,7 @@ Only as a Client:
 
 ### Handle players joining & leaving
 
-* Completeness: Totally achieved with bug pending
-* Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of `prxys` of the **server**. Furthermore every time the same **client** tried to reconnect the server took longer to process the `packets`.
-* Bug resolution: For the first bug, we made sure that on the `OnDisconnect()` function we deleted what we needed to and for the second bug we found it was not working because we missed a `clear()` and the reset of the `delivery manager` when disconnecting the **client**.
+* Completeness: Almost totally achieved with bug pending.
+* Bugs during implementation: At the beginning if someone tried to disconnect and after that tried to reconnect, the player computer (character) was still inside the list of `proxys` of the **Server**. Furthermore every time the same **Client** tried to reconnect the server took longer to process the `packets`.
+* Bug resolution: For the first bug, we made sure that on the `onDisconnect()` function we deleted what we needed to and for the second bug we found it was not working because we missed a `clear()` and the reset of the `DeliveryManager` when disconnecting the **Client**.
 * Known bugs: When disconnecting from **server** and reconecting, the server crashes.
